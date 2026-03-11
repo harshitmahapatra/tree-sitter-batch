@@ -24,6 +24,7 @@
     "binding.gyp",
     "prebuilds/**",
     "bindings/node/*",
+    "!bindings/node/*_test.js",
     "queries/*",
     "src/**",
     "*.wasm"
