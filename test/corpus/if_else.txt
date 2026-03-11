@@ -1,0 +1,77 @@
+================
+IF ELSE with parenthesized blocks
+================
+
+if exist "file.txt" (
+echo found
+) else (
+echo missing
+)
+
+---
+
+(program
+  (if_stmt
+    (string)
+    (parenthesized
+      (cmd
+        (command_name)
+        (argument_list
+          (argument_value))))
+    (else_clause
+      (parenthesized
+        (cmd
+          (command_name)
+          (argument_list
+            (argument_value)))))))
+
+================
+IF ELSE with inline else command
+================
+
+if exist "file.txt" (
+echo found
+) else echo missing
+
+---
+
+(program
+  (if_stmt
+    (string)
+    (parenthesized
+      (cmd
+        (command_name)
+        (argument_list
+          (argument_value))))
+    (else_clause
+      (cmd
+        (command_name)
+        (argument_list
+          (argument_value))))))
+
+================
+IF NOT with else
+================
+
+if not exist "file.txt" (
+echo missing
+) else (
+echo found
+)
+
+---
+
+(program
+  (if_stmt
+    (string)
+    (parenthesized
+      (cmd
+        (command_name)
+        (argument_list
+          (argument_value))))
+    (else_clause
+      (parenthesized
+        (cmd
+          (command_name)
+          (argument_list
+            (argument_value)))))))

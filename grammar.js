@@ -40,6 +40,15 @@ export default grammar({
           choice($.string, $.variable_reference, $.integer),
         ),
       ),
+      choice(
+        // Parenthesized form: supports else clause
+        seq($.parenthesized, optional($.else_clause)),
+        // Inline command form: no else (ambiguous)
+        $.cmd,
+      ),
+    )),
+    else_clause: ($) => prec.right(8, seq(
+      kw('else'),
       choice($.parenthesized, $.cmd),
     )),
     comparison_op: () => token(prec(10, choice('==', ci('equ'), ci('neq'), ci('lss'), ci('leq'), ci('gtr'), ci('geq')))),
