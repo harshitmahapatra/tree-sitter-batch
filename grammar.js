@@ -20,14 +20,17 @@ export default grammar({
       seq('::', /[^\r\n]*/),
     ))),
     label: () => token(seq(':', /[a-zA-Z_][a-zA-Z0-9_-]*/)),
-    variable_assignment: () => prec(8, seq(
-      optional('@'), kw('set'),
+    variable_assignment: ($) => prec(8, seq(
+      optional('@'), $.set_keyword,
       optional(seq(/[ \t]+/, /\/[aApP]/)), /[ \t]+/,
       choice(
-        seq('"', /[a-zA-Z_][a-zA-Z0-9_]*/, '=', optional(/[^"\r\n]*/), '"'),
-        seq(/[a-zA-Z_][a-zA-Z0-9_]*/, '=', optional(/[^\r\n]*/)),
+        seq('"', $.assignment_variable, "=", optional(choice($.integer, $.assignment_string)), '"'),
+        seq($.assignment_variable, "=", optional(choice($.integer, $.assignment_string))),
       ),
     )),
+    set_keyword: () => kw("set"),
+    assignment_variable: () => /[a-zA-Z_][a-zA-Z0-9_]*/,
+    assignment_string: () => /[^\r\n"]+/,    
     if_stmt: ($) => prec.right(8, seq(
       optional('@'), kw('if'),
       optional(kw('not')),

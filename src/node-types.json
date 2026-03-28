@@ -27,6 +27,11 @@
     }
   },
   {
+    "type": "assignment_variable",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "call_stmt",
     "named": true,
     "fields": {},
@@ -431,7 +436,29 @@
   {
     "type": "variable_assignment",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assignment_string",
+          "named": true
+        },
+        {
+          "type": "assignment_variable",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "set_keyword",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "\"",
@@ -459,6 +486,10 @@
   },
   {
     "type": "argument_value",
+    "named": true
+  },
+  {
+    "type": "assignment_string",
     "named": true
   },
   {
@@ -499,6 +530,10 @@
   },
   {
     "type": "redirect_target",
+    "named": true
+  },
+  {
+    "type": "set_keyword",
     "named": true
   },
   {

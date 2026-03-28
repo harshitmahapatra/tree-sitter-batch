@@ -250,15 +250,8 @@
             ]
           },
           {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 10,
-              "content": {
-                "type": "PATTERN",
-                "value": "[sS][eE][tT]"
-              }
-            }
+            "type": "SYMBOL",
+            "name": "set_keyword"
           },
           {
             "type": "CHOICE",
@@ -296,8 +289,8 @@
                     "value": "\""
                   },
                   {
-                    "type": "PATTERN",
-                    "value": "[a-zA-Z_][a-zA-Z0-9_]*"
+                    "type": "SYMBOL",
+                    "name": "assignment_variable"
                   },
                   {
                     "type": "STRING",
@@ -307,8 +300,17 @@
                     "type": "CHOICE",
                     "members": [
                       {
-                        "type": "PATTERN",
-                        "value": "[^\"\\r\\n]*"
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "integer"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "assignment_string"
+                          }
+                        ]
                       },
                       {
                         "type": "BLANK"
@@ -325,8 +327,8 @@
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "PATTERN",
-                    "value": "[a-zA-Z_][a-zA-Z0-9_]*"
+                    "type": "SYMBOL",
+                    "name": "assignment_variable"
                   },
                   {
                     "type": "STRING",
@@ -336,8 +338,17 @@
                     "type": "CHOICE",
                     "members": [
                       {
-                        "type": "PATTERN",
-                        "value": "[^\\r\\n]*"
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "integer"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "assignment_string"
+                          }
+                        ]
                       },
                       {
                         "type": "BLANK"
@@ -350,6 +361,25 @@
           }
         ]
       }
+    },
+    "set_keyword": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 10,
+        "content": {
+          "type": "PATTERN",
+          "value": "[sS][eE][tT]"
+        }
+      }
+    },
+    "assignment_variable": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z_][a-zA-Z0-9_]*"
+    },
+    "assignment_string": {
+      "type": "PATTERN",
+      "value": "[^\\r\\n\"]+"
     },
     "if_stmt": {
       "type": "PREC_RIGHT",
@@ -1750,5 +1780,6 @@
   "precedences": [],
   "externals": [],
   "inline": [],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }
