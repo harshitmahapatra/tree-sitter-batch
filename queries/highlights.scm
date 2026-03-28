@@ -12,6 +12,9 @@
 (variable_assignment (assignment_variable) @variable)
 (variable_assignment (assignment_string) @string)
 (variable_assignment (integer) @number)
+(prompt_assignment (assignment_variable) @variable)
+(prompt_assignment (assignment_string) @string)
+(arithmetic_expression) @string
 
 ; IF/FOR/GOTO/CALL statements
 (if_stmt) @keyword

@@ -22,11 +22,28 @@ export default grammar({
     label: () => token(seq(':', /[a-zA-Z_][a-zA-Z0-9_-]*/)),
     variable_assignment: ($) => prec(8, seq(
       optional('@'), $.set_keyword,
-      optional(seq(/[ \t]+/, /\/[aApP]/)), /[ \t]+/,
       choice(
+        $.arithmetic_assignment,
+        $.prompt_assignment,
         seq('"', $.assignment_variable, "=", optional(choice($.integer, $.assignment_string)), '"'),
         seq($.assignment_variable, "=", optional(choice($.integer, $.assignment_string))),
       ),
+    )),
+    // SET /A — evaluates a numeric expression; e.g. `set /a result=5` or `set /a "x=y+1"`
+    arithmetic_assignment: ($) => seq(
+      token(prec(10, ci('/a'))),
+      $.arithmetic_expression,
+    ),
+    // SET /P — displays a prompt and reads user input; e.g. `set /p answer=Enter value:`
+    prompt_assignment: ($) => seq(
+      token(prec(10, ci('/p'))),
+      $.assignment_variable, '=', optional($.assignment_string),
+    ),
+    // The full arithmetic expression text (operators, variable names, literals, hex/octal numbers).
+    // Handles both quoted (`"x=y+1"`) and unquoted (`result=5`) forms as a single atomic token.
+    arithmetic_expression: () => token(choice(
+      seq('"', /[^"\r\n]*/, '"'),
+      /[^\r\n"]+/,
     )),
     set_keyword: () => kw("set"),
     assignment_variable: () => /[a-zA-Z_][a-zA-Z0-9_]*/,

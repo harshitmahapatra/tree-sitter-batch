@@ -37,8 +37,36 @@ set /a result=5
 (program
   (variable_assignment
     (set_keyword)
-    (assignment_variable)
-    (assignment_string)))
+    (arithmetic_assignment
+      (arithmetic_expression))))
+
+================
+SET /a complex expression
+================
+
+set /a x=y+1
+
+---
+
+(program
+  (variable_assignment
+    (set_keyword)
+    (arithmetic_assignment
+      (arithmetic_expression))))
+
+================
+SET /a quoted expression
+================
+
+set /a "a=b*c"
+
+---
+
+(program
+  (variable_assignment
+    (set_keyword)
+    (arithmetic_assignment
+      (arithmetic_expression))))
 
 ================
 SET /p prompt
@@ -51,5 +79,20 @@ set /p answer=Enter value:
 (program
   (variable_assignment
     (set_keyword)
-    (assignment_variable)
-    (assignment_string)))
+    (prompt_assignment
+      (assignment_variable)
+      (assignment_string))))
+
+================
+SET /p empty prompt
+================
+
+set /p name=
+
+---
+
+(program
+  (variable_assignment
+    (set_keyword)
+    (prompt_assignment
+      (assignment_variable))))

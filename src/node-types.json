@@ -27,6 +27,21 @@
     }
   },
   {
+    "type": "arithmetic_assignment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "arithmetic_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "assignment_variable",
     "named": true,
     "fields": {}
@@ -387,6 +402,25 @@
     }
   },
   {
+    "type": "prompt_assignment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assignment_string",
+          "named": true
+        },
+        {
+          "type": "assignment_variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "redirect_stmt",
     "named": true,
     "fields": {},
@@ -442,6 +476,10 @@
       "required": true,
       "types": [
         {
+          "type": "arithmetic_assignment",
+          "named": true
+        },
+        {
           "type": "assignment_string",
           "named": true
         },
@@ -451,6 +489,10 @@
         },
         {
           "type": "integer",
+          "named": true
+        },
+        {
+          "type": "prompt_assignment",
           "named": true
         },
         {
@@ -486,6 +528,10 @@
   },
   {
     "type": "argument_value",
+    "named": true
+  },
+  {
+    "type": "arithmetic_expression",
     "named": true
   },
   {
