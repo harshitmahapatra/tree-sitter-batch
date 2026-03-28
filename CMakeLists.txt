@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-batch
-        VERSION "0.3.3"
+        VERSION "0.3.4"
         DESCRIPTION "A Windows Batch/CMD grammar for tree-sitter"
         HOMEPAGE_URL "https://github.com/wharflab/tree-sitter-batch"
         LANGUAGES C)
