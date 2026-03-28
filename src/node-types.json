@@ -42,6 +42,21 @@
     }
   },
   {
+    "type": "assignment_string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "variable_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "assignment_variable",
     "named": true,
     "fields": {}
@@ -421,6 +436,21 @@
     }
   },
   {
+    "type": "quoted_assignment_string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "variable_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "redirect_stmt",
     "named": true,
     "fields": {},
@@ -539,10 +569,6 @@
     "named": true
   },
   {
-    "type": "assignment_string",
-    "named": true
-  },
-  {
     "type": "command_name",
     "named": true
   },
@@ -572,10 +598,6 @@
   },
   {
     "type": "integer",
-    "named": true
-  },
-  {
-    "type": "quoted_assignment_string",
     "named": true
   },
   {

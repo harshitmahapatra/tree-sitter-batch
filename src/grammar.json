@@ -446,12 +446,52 @@
       "value": "[a-zA-Z_][a-zA-Z0-9_]*"
     },
     "assignment_string": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "variable_reference"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_assignment_string_literal"
+            }
+          ]
+        }
+      }
+    },
+    "_assignment_string_literal": {
       "type": "PATTERN",
-      "value": "[^\\r\\n]+"
+      "value": "[^%!\\r\\n]+"
     },
     "quoted_assignment_string": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "variable_reference"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_quoted_assignment_string_literal"
+            }
+          ]
+        }
+      }
+    },
+    "_quoted_assignment_string_literal": {
       "type": "PATTERN",
-      "value": "[^\\r\\n\"]+"
+      "value": "[^%!\"\\r\\n]+"
     },
     "if_stmt": {
       "type": "PREC_RIGHT",
@@ -1616,7 +1656,7 @@
               },
               {
                 "type": "PATTERN",
-                "value": "[a-zA-Z_][a-zA-Z0-9_]*"
+                "value": "[a-zA-Z_][a-zA-Z0-9_()\\[\\]]*"
               },
               {
                 "type": "STRING",
@@ -1705,7 +1745,7 @@
               },
               {
                 "type": "PATTERN",
-                "value": "[a-zA-Z_][a-zA-Z0-9_]*"
+                "value": "[a-zA-Z_][a-zA-Z0-9_()\\[\\]]*"
               },
               {
                 "type": "STRING",

@@ -47,8 +47,16 @@ export default grammar({
     )),
     set_keyword: () => kw("set"),
     assignment_variable: () => /[a-zA-Z_][a-zA-Z0-9_]*/,
-    assignment_string: () => /[^\r\n]+/,
-    quoted_assignment_string: () => /[^\r\n"]+/,
+    assignment_string: ($) => prec.right(repeat1(choice(
+      $.variable_reference,
+      $._assignment_string_literal,
+    ))),
+    _assignment_string_literal: () => /[^%!\r\n]+/,
+    quoted_assignment_string: ($) => prec.right(repeat1(choice(
+      $.variable_reference,
+      $._quoted_assignment_string_literal,
+    ))),
+    _quoted_assignment_string_literal: () => /[^%!"\r\n]+/,
     if_stmt: ($) => prec.right(8, seq(
       optional('@'), kw('if'),
       optional(kw('not')),
@@ -119,12 +127,12 @@ export default grammar({
       prec.left(1, seq(choice($.cmd, $.parenthesized), '||', choice($.cmd, $.parenthesized))),
     ),
     variable_reference: () => token(choice(
-      seq('%', /[a-zA-Z_][a-zA-Z0-9_]*/, '%'),
+      seq('%', /[a-zA-Z_][a-zA-Z0-9_()\[\]]*/, '%'),
       seq('%~', /[a-zA-Z]*/, /[0-9]/),
       seq('%', /[0-9]/),
       seq('%%', optional('~'), /[a-zA-Z]/),
       seq('!', /[a-zA-Z_][a-zA-Z0-9_]*/, '!'),
-      seq('%', /[a-zA-Z_][a-zA-Z0-9_]*/, ':', /[^%]+/, '%'),
+      seq('%', /[a-zA-Z_][a-zA-Z0-9_()\[\]]*/, ':', /[^%]+/, '%'),
     )),
     string: () => token(seq('"', /[^"\r\n]*/, '"')),
     cmd: ($) => prec.right(5, seq(optional('@'), $.command_name, optional($.argument_list))),

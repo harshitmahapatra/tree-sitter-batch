@@ -112,6 +112,81 @@ SET python_loc="\bin\python" "\32\bin\python" "\Python\python"
     (assignment_string)))
 
 ================
+SET variable reference in unquoted value
+================
+
+SET path=%userprofile%\scripts
+
+---
+
+(program
+  (variable_assignment
+    (set_keyword)
+    (assignment_variable)
+    (assignment_string
+      (variable_reference))))
+
+================
+SET variable reference in quoted SET form
+================
+
+SET "path=%userprofile%\scripts"
+
+---
+
+(program
+  (variable_assignment
+    (set_keyword)
+    (assignment_variable)
+    (quoted_assignment_string
+      (variable_reference))))
+
+================
+SET variable with parens in variable name
+================
+
+SET path=%programfiles(x86)%\app
+
+---
+
+(program
+  (variable_assignment
+    (set_keyword)
+    (assignment_variable)
+    (assignment_string
+      (variable_reference))))
+
+================
+SET multiple variable references in assignment
+================
+
+SET cmd=%windir%\system32\%tool%.exe
+
+---
+
+(program
+  (variable_assignment
+    (set_keyword)
+    (assignment_variable)
+    (assignment_string
+      (variable_reference)
+      (variable_reference))))
+
+================
+SET /a quoted arithmetic percent is not a variable reference
+================
+
+set /a "x %=5"
+
+---
+
+(program
+  (variable_assignment
+    (set_keyword)
+    (arithmetic_assignment
+      (arithmetic_expression))))
+
+================
 SET variable with quoted paths containing variable references
 ================
 
@@ -123,4 +198,7 @@ SET gimp_loc="%userprofile%\AppData\Local\Programs\GIMP" "%programfiles(x86)%\GI
   (variable_assignment
     (set_keyword)
     (assignment_variable)
-    (assignment_string)))
+    (assignment_string
+      (variable_reference)
+      (variable_reference)
+      (variable_reference))))
