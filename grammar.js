@@ -25,7 +25,7 @@ export default grammar({
       choice(
         $.arithmetic_assignment,
         $.prompt_assignment,
-        seq('"', $.assignment_variable, "=", optional(choice($.integer, $.assignment_string)), '"'),
+        seq('"', $.assignment_variable, "=", optional(choice($.integer, $.quoted_assignment_string)), '"'),
         seq($.assignment_variable, "=", optional(choice($.integer, $.assignment_string))),
       ),
     )),
@@ -47,7 +47,8 @@ export default grammar({
     )),
     set_keyword: () => kw("set"),
     assignment_variable: () => /[a-zA-Z_][a-zA-Z0-9_]*/,
-    assignment_string: () => /[^\r\n"]+/,    
+    assignment_string: () => /[^\r\n]+/,
+    quoted_assignment_string: () => /[^\r\n"]+/,
     if_stmt: ($) => prec.right(8, seq(
       optional('@'), kw('if'),
       optional(kw('not')),

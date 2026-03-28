@@ -24,7 +24,7 @@ set "MY_VAR=hello world"
   (variable_assignment
     (set_keyword)
     (assignment_variable)
-    (assignment_string)))
+    (quoted_assignment_string)))
 
 ================
 SET /a arithmetic
@@ -96,3 +96,31 @@ set /p name=
     (set_keyword)
     (prompt_assignment
       (assignment_variable))))
+
+================
+SET variable with multiple quoted backslash paths
+================
+
+SET python_loc="\bin\python" "\32\bin\python" "\Python\python"
+
+---
+
+(program
+  (variable_assignment
+    (set_keyword)
+    (assignment_variable)
+    (assignment_string)))
+
+================
+SET variable with quoted paths containing variable references
+================
+
+SET gimp_loc="%userprofile%\AppData\Local\Programs\GIMP" "%programfiles(x86)%\GIMP" "%programfiles%\GIMP"
+
+---
+
+(program
+  (variable_assignment
+    (set_keyword)
+    (assignment_variable)
+    (assignment_string)))

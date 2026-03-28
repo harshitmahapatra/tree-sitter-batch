@@ -496,6 +496,10 @@
           "named": true
         },
         {
+          "type": "quoted_assignment_string",
+          "named": true
+        },
+        {
           "type": "set_keyword",
           "named": true
         }
@@ -568,6 +572,10 @@
   },
   {
     "type": "integer",
+    "named": true
+  },
+  {
+    "type": "quoted_assignment_string",
     "named": true
   },
   {

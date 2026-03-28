@@ -11,6 +11,7 @@
 (variable_assignment (set_keyword) @keyword)
 (variable_assignment (assignment_variable) @variable)
 (variable_assignment (assignment_string) @string)
+(variable_assignment (quoted_assignment_string) @string)
 (variable_assignment (integer) @number)
 (prompt_assignment (assignment_variable) @variable)
 (prompt_assignment (assignment_string) @string)
