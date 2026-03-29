@@ -36,6 +36,9 @@
 ; Variables
 (variable_reference) @variable
 
+; FOR set (literal parts styled as string; variable_reference children override to @variable)
+(for_set) @string
+
 ; FOR loop variables
 (for_variable) @variable.parameter
 

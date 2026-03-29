@@ -1335,8 +1335,28 @@
       }
     },
     "for_set": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "variable_reference"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_for_set_literal"
+            }
+          ]
+        }
+      }
+    },
+    "_for_set_literal": {
       "type": "PATTERN",
-      "value": "[^)\\r\\n]+"
+      "value": "[^%!)\\r\\n]+"
     },
     "parenthesized": {
       "type": "SEQ",

@@ -112,7 +112,11 @@ export default grammar({
     )),
     for_options: () => token(prec(10, choice(ci('/d'), seq(ci('/r'), optional(seq(/[ \t]+/, /[^\s]+/))), ci('/l'), seq(ci('/f'), optional(seq(/[ \t]+/, '"', /[^"]*/, '"')))))),
     for_variable: () => token(seq('%%', optional('~'), /[a-zA-Z]/)),
-    for_set: () => /[^)\r\n]+/,
+    for_set: ($) => prec.right(repeat1(choice(
+      $.variable_reference,
+      $._for_set_literal,
+    ))),
+    _for_set_literal: () => /[^%!)\r\n]+/,
     parenthesized: ($) => seq('(', repeat(choice(seq($._stmt, /\r?\n/), /\r?\n/)), ')'),
     redirect_stmt: ($) => prec.right(4, seq(choice($.cmd, $.parenthesized), $.redirection)),
     redirection: ($) => prec.right(seq(

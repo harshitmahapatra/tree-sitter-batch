@@ -167,6 +167,21 @@
     }
   },
   {
+    "type": "for_set",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "variable_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "for_stmt",
     "named": true,
     "fields": {},
@@ -586,10 +601,6 @@
   },
   {
     "type": "for_options",
-    "named": true
-  },
-  {
-    "type": "for_set",
     "named": true
   },
   {
